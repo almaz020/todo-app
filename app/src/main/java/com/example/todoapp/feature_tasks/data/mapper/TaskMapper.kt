@@ -1,5 +1,6 @@
 package com.example.todoapp.feature_tasks.data.mapper
 
+import com.example.todoapp.core.database.local.entity.TaskEntity
 import com.example.todoapp.feature_tasks.domain.model.Task
 
 fun TaskEntity.toDomain() = Task(

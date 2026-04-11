@@ -4,6 +4,7 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.example.todoapp.feature_tasks.presentation.create.CreateTaskScreen
 import com.example.todoapp.feature_tasks.presentation.detail.TaskDetailScreen
 import com.example.todoapp.feature_tasks.presentation.list.TaskListScreen
 
@@ -21,6 +22,9 @@ fun AppNavGraph() {
             TaskListScreen(
                 onTaskClick = { taskId ->
                     navController.navigate("task_detail/$taskId")
+                },
+                onCreateClick = {
+                    navController.navigate("create_task")
                 }
             )
         }
@@ -32,6 +36,11 @@ fun AppNavGraph() {
                 ?.toIntOrNull()
 
             TaskDetailScreen(taskId = taskId)
+        }
+        composable("create_task") {
+            CreateTaskScreen(
+                onBack = { navController.popBackStack() }
+            )
         }
     }
 }

@@ -8,3 +8,8 @@ fun formatTime(start: Long, end: Long): String {
     val sdf = SimpleDateFormat("HH:mm", Locale.getDefault())
     return "${sdf.format(Date(start))} - ${sdf.format(Date(end))}"
 }
+
+fun formatOnlyTime(timestamp: Long): String {
+    val formatter = SimpleDateFormat("HH:mm", Locale.getDefault())
+    return formatter.format(Date(timestamp))
+}

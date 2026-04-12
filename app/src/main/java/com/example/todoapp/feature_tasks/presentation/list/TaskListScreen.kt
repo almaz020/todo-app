@@ -18,6 +18,9 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.compose.LocalLifecycleOwner
+import androidx.lifecycle.repeatOnLifecycle
 import com.example.todoapp.feature_tasks.presentation.list.components.CalendarRow
 import com.example.todoapp.feature_tasks.presentation.list.components.HourSlotItem
 import org.koin.androidx.compose.koinViewModel
@@ -31,7 +34,15 @@ fun TaskListScreen(
     val days by viewModel.days.collectAsState()
     val slots by viewModel.slots.collectAsState()
 
-    Box(modifier = Modifier.fillMaxSize()) {
+    val lifecycleOwner = LocalLifecycleOwner.current
+    LaunchedEffect(lifecycleOwner) {
+        lifecycleOwner.lifecycle.repeatOnLifecycle(Lifecycle.State.RESUMED) {
+            viewModel.loadTasksForDate(viewModel.selectedDate.value)
+        }
+    }
+
+
+    Box(modifier = Modifier.fillMaxSize().padding(vertical = 26.dp, horizontal = 6.dp)) {
 
         Column(modifier = Modifier.fillMaxSize()) {
             CalendarRow(

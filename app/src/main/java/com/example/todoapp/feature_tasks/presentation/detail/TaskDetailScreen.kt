@@ -1,7 +1,9 @@
 package com.example.todoapp.feature_tasks.presentation.detail
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
@@ -21,6 +23,7 @@ import org.koin.androidx.compose.koinViewModel
 @Composable
 fun TaskDetailScreen(
     taskId: Int?,
+    onBack: () -> Unit,
     viewModel: TaskDetailViewModel = koinViewModel()
 ) {
 
@@ -45,8 +48,18 @@ fun TaskDetailScreen(
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .padding(16.dp)
+            .padding(vertical = 30.dp, horizontal = 16.dp)
     ) {
+        Row(
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Text(
+                text = "← Назад",
+                modifier = Modifier
+                    .clickable { onBack() }
+                    .padding(8.dp)
+            )
+        }
 
         Text(
             text = t.name,

@@ -30,6 +30,7 @@ class CreateTaskViewModel(
         name = value
     }
 
+
     fun onDescriptionChange(value: String) {
         description = value
     }
@@ -43,6 +44,8 @@ class CreateTaskViewModel(
     }
 
     fun createTask(onSuccess: () -> Unit) {
+        if (dateEnd <= dateStart) return
+
         viewModelScope.launch {
             val task = Task(
                 id = 0,
@@ -55,4 +58,6 @@ class CreateTaskViewModel(
             onSuccess()
         }
     }
+
+
 }

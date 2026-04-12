@@ -1,6 +1,7 @@
 package com.example.todoapp.app.navigation
 
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
@@ -35,7 +36,10 @@ fun AppNavGraph() {
                 ?.getString("taskId")
                 ?.toIntOrNull()
 
-            TaskDetailScreen(taskId = taskId)
+            TaskDetailScreen(
+                taskId = taskId,
+                onBack = { navController.popBackStack() }
+            )
         }
         composable("create_task") {
             CreateTaskScreen(
